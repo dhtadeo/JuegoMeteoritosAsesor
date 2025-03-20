@@ -57,29 +57,29 @@
 
                 this.load.image('fondo', fondoSVG);
                 this.load.image('platillobajo', platillobajoSVG);
-                this.load.image('nave', naveSVG);
-                this.load.image('nave1', nave1SVG);
-                this.load.image('nave2', nave2SVG);
-                this.load.image('nave3', nave3SVG);
-                this.load.image('nave4', nave4SVG);
-                this.load.image('meteoritos', 'meteoritos.png');
-                this.load.image('meteoritos2', meteorito2SVG);
-                this.load.image('explosion', 'explosion.png');
+                this.load.image('nave', 'assets/nave_1.png');
+                this.load.image('nave1', 'assets/nave_1.png');
+                this.load.image('nave2', 'assets/nave_right.png');
+                this.load.image('nave3', 'assets/nave_left.png');
+                this.load.image('nave4', 'assets/nave_down.png');
+                this.load.image('meteoritos', 'assets/meteorito_2.png');
+                this.load.image('meteoritos2', 'assets/meteorito_1.png');
+                this.load.image('explosion', 'assets/explosion_1.png');
                 this.load.image('explosion2', explosion2SVG);
-                this.load.image('galaxia', galaxiaSVG);
+                this.load.image('galaxia', 'assets/galaxy_1.png');
                 this.load.image('platilloarriba', platilloarribaSVG);
                 this.load.image('estrella1', estrella1SVG);
                 this.load.image('estrella2', estrella2SVG);
                 this.load.image('estrella3', estrella3SVG);
-                this.load.image('gema', gemaSVG);
+                this.load.image('gema', 'assets/gema_1.png');
                 this.load.image('proyectil', proyectilSVG);
             },
             create: function() {
                 this.add.sprite(0, 0, 'fondo'); //agregamos el fondo
                 this.galaxia = this.add.sprite(this.world.width/2, this.world.height/2,'galaxia');
                 this.galaxia.anchor.setTo(0.5);
-                this.galaxia.alpha= 0.9;
-                this.galaxia.scale.setTo(2);
+                this.galaxia.alpha= 0.5;
+                this.galaxia.scale.setTo(1.5);
                 this.platillobajo = this.add.sprite(this.rnd.integerInRange(-1600,-800), this.world.height-150, 'platillobajo');
                 
                 this.EstrellasArray = [];
