@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>GalaxyGem</title>
+    <title>Trash Collector</title>
     <style type="text/css">
         body {
             margin: 0;
@@ -19,7 +19,7 @@
         var TeclaPresionada=false;
         var MeteoritosTotales = 80; //cantidad de meteoritos animados
         var MeteoritosIndestructibles = 15;
-        var EstrellasTotales =100;  //cantidad de estrellas animadas en fondo
+        var EstrellasTotales =150;  //cantidad de estrellas animadas en fondo
         var GemasTotales=15; //total de gemas a recolectar
         
         var EstadosGalaxyGem = {
@@ -55,30 +55,34 @@
                 const gemaSVG = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><polygon points="20,0 30,10 30,30 20,40 10,30 10,10" fill="#00BCD4"/></svg>');
                 const proyectilSVG = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="40" viewBox="0 0 20 40"><rect x="8" y="0" width="4" height="40" fill="#FF5722"/></svg>');
 
-                this.load.image('fondo', fondoSVG);
+                this.load.image('fondo', 'assets/ocean_bg.png');
                 this.load.image('platillobajo', platillobajoSVG);
-                this.load.image('nave', 'assets/nave_1.png');
-                this.load.image('nave1', 'assets/nave_1.png');
-                this.load.image('nave2', 'assets/nave_right.png');
-                this.load.image('nave3', 'assets/nave_left.png');
-                this.load.image('nave4', 'assets/nave_down.png');
-                this.load.image('meteoritos', 'assets/meteorito_2.png');
-                this.load.image('meteoritos2', 'assets/meteorito_1.png');
-                this.load.image('explosion', 'assets/explosion_1.png');
-                this.load.image('explosion2', explosion2SVG);
-                this.load.image('galaxia', 'assets/galaxy_1.png');
-                this.load.image('platilloarriba', platilloarribaSVG);
-                this.load.image('estrella1', estrella1SVG);
-                this.load.image('estrella2', estrella2SVG);
-                this.load.image('estrella3', estrella3SVG);
-                this.load.image('gema', 'assets/gema_1.png');
-                this.load.image('proyectil', proyectilSVG);
+                this.load.image('nave', 'assets/sub_up.png');
+                this.load.image('nave1', 'assets/sub_up.png');
+                this.load.image('nave2', 'assets/sub_right.png');
+                this.load.image('nave3', 'assets/sub_left.png');
+                this.load.image('nave4', 'assets/sub_down.png');
+                this.load.image('meteoritos', 'assets/trash_1.png');
+                this.load.image('meteoritos12', 'assets/trash_2.png');
+                this.load.image('meteoritos13', 'assets/trash_3.png');
+                this.load.image('meteoritos14', 'assets/trash_4.png');
+                this.load.image('meteoritos15', 'assets/trash_5.png');
+                this.load.image('meteoritos2', 'assets/rock_hazard_1.png');
+                this.load.image('explosion', 'assets/pop_1.png');
+                this.load.image('explosion2', '');
+                this.load.image('galaxia', '');
+                this.load.image('platilloarriba', '');
+                this.load.image('estrella1', 'assets/bubble_1.png');
+                this.load.image('estrella2', 'assets/bubble_1.png');
+                this.load.image('estrella3', 'assets/bubble_1.png');
+                this.load.image('gema', 'assets/money.png');
+                this.load.image('proyectil', 'assets/dart_1.png');
             },
             create: function() {
                 this.add.sprite(0, 0, 'fondo'); //agregamos el fondo
                 this.galaxia = this.add.sprite(this.world.width/2, this.world.height/2,'galaxia');
                 this.galaxia.anchor.setTo(0.5);
-                this.galaxia.alpha= 0.5;
+                this.galaxia.alpha= 0.0;
                 this.galaxia.scale.setTo(1.5);
                 this.platillobajo = this.add.sprite(this.rnd.integerInRange(-1600,-800), this.world.height-150, 'platillobajo');
                 
@@ -143,9 +147,13 @@
                 
                 //creación del vector de los meteoritos
                 this.meteoritos = [];
+                const meteoritoKeys = ['meteoritos', 'meteoritos12', 'meteoritos13', 'meteoritos14', 'meteoritos15']; //random
+
                 for(var i=0; i<MeteoritosTotales; i++){
-                    var meteorito = this.add.sprite(0,0,'meteoritos');
-                    meteorito.scale.setTo(0.4 + this.rnd.frac() * 0.7); //escala aleatoria
+
+                    var key = this.rnd.pick(meteoritoKeys)
+                    var meteorito = this.add.sprite(0,0,key);
+                    meteorito.scale.setTo(0.8 + this.rnd.frac() * 0.9); //escala aleatoria
                     meteorito.anchor.setTo(0.5); //establecer centro
                     meteorito.x = this.rnd.integerInRange(1, 1270); //posición aleatoria de inicio
                     meteorito.y = this.rnd.integerInRange(-400,-10);
@@ -217,10 +225,10 @@
                     align: 'center'
                 };
                 
-                this.PuntajeGem = this.add.text(this.world.width/2, 30, 'Gemas: ' + 0 + '/' + 15, style2);
+                this.PuntajeGem = this.add.text(this.world.width/2, 30, '$' + 0 + ' / $' + 15, style2);
                 this.PuntajeGem.anchor.setTo(0.5);
                 this.SaludActualNave = 100; //salud de la nave
-                this.TextoSaludNave = this.add.text(150,30, 'Salud: ' + 100, style);
+                this.TextoSaludNave = this.add.text(150,30, 'Vida: ' + 100, style);
                 this.TextoSaludNave.anchor.setTo(0.5);
                 this.totalTime = 60;
                 this.timerText = this.add.text(this.world.width-200, 30, 'Tiempo: ' + this.totalTime, style3);
@@ -242,24 +250,24 @@
             },
             
             increaseScore: function(){
-                this.TextoSaludNave.text='Salud: ' + this.SaludActualNave;
+                this.TextoSaludNave.text='Vida: ' + this.SaludActualNave;
                 this.MeteoritosImpactados += 1;
                 if(this.SaludActualNave < 0){
                     this.time.events.remove(this.timerGameOver);
                     this.JuegoTerminado = true;
-                    this.showFinalMessage('PERDISTE! \n Los meteoritos te aniquilaron \n presiona F5 para Reiniciar');
+                    this.showFinalMessage('PERDISTE! \n Dejaste acumular una cantidad excesiva\nde basura \n presiona F5 para Reiniciar');
                 }
             },
             
             GemasPuntajeIncremento: function(){
                 this.PuntajeActualGema+=1;
-                this.PuntajeGem.text = 'Gemas: ' + this.PuntajeActualGema + '/15';
-                this.TextoSaludNave.text='Salud: ' + this.SaludActualNave;
+                this.PuntajeGem.text = '$ ' + this.PuntajeActualGema + ' / $15';
+                this.TextoSaludNave.text='Vida: ' + this.SaludActualNave;
                 this.GemasCapturadas +=1;
                 if(this.PuntajeActualGema >= GemasTotales){
                     this.time.events.remove(this.timerGameOver);
                     this.JuegoTerminado = true;
-                    this.showFinalMessage('GANASTE! \n Capturaste todas las Gemas \n presiona F5 para Reiniciar');
+                    this.showFinalMessage('GANASTE! \n Obtuviste todas las monedas \n presiona F5 para Reiniciar');
                 }
             },
             
@@ -430,7 +438,7 @@
                         var rectmeteorito = this.getBoundsmeteorito(this.meteoritos[i]);
                         if(this.meteoritos[i].visible && this.isRectanglesOverlapping(rectnave, rectmeteorito)){
                             this.SaludActualNave-=Math.trunc(this.meteoritos[i].scale.x*5);
-                            this.TextoSaludNave.text='Salud: ' + this.SaludActualNave;
+                            this.TextoSaludNave.text='Vida: ' + this.SaludActualNave;
                             this.increaseScore();
                             this.meteoritos[i].visible = false;
                             var explosion = this.explosionGroup.getFirstDead();
