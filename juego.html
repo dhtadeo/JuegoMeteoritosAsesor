@@ -36,6 +36,7 @@
             //cargar todas las imágenes no importa el orden
             preload: function() {
                 // Crear imágenes SVG como reemplazo
+                /*
                 const fondoSVG = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><rect width="1280" height="720" fill="#000B3F"/></svg>');
                 const naveSVG = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><polygon points="40,10 20,70 40,60 60,70" fill="#42A5F5"/><circle cx="40" cy="40" r="15" fill="#9575CD"/></svg>');
                 const nave1SVG = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><polygon points="40,5 20,70 40,60 60,70" fill="#42A5F5"/><circle cx="40" cy="30" r="15" fill="#9575CD"/></svg>');
@@ -54,9 +55,10 @@
                 const estrella3SVG = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="#FFFFFF"/></svg>');
                 const gemaSVG = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><polygon points="20,0 30,10 30,30 20,40 10,30 10,10" fill="#00BCD4"/></svg>');
                 const proyectilSVG = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="40" viewBox="0 0 20 40"><rect x="8" y="0" width="4" height="40" fill="#FF5722"/></svg>');
-
+                */
+                
                 this.load.image('fondo', 'assets/ocean_bg.png');
-                this.load.image('platillobajo', platillobajoSVG);
+                this.load.image('platillobajo', '');
                 this.load.image('nave', 'assets/sub_up.png');
                 this.load.image('nave1', 'assets/sub_up.png');
                 this.load.image('nave2', 'assets/sub_right.png');
@@ -495,7 +497,7 @@
                         var rectGemas = this.getBoundsGemas(this.GemasArray[i]);
                         if(this.GemasArray[i].visible && this.isRectanglesOverlapping(rectnave, rectGemas)){
                             this.GemasPuntajeIncremento();
-                            this.SaludActualNave+=3;
+                            this.SaludActualNave+=1;
                             this.GemasArray[i].visible = false;
                             var explosion = this.explosionGroup.getFirstDead();
                             if(explosion!=null){
@@ -522,7 +524,7 @@
         GalaxyGem.state.start('MiJuegoGG');
         
         // Show game instructions
-        alert("¡Da click para Iniciar el Juego! \nUtiliza las direccionales para moverte");
+        //alert("¡Da click para Iniciar el Juego! \nUtiliza las direccionales para moverte");
     </script>
 </body>
 </html>
